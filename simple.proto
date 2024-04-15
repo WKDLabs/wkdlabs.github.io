@@ -7,22 +7,22 @@ enum MsgType {
     CMD = 3;
     ATTR_WRITE = 4;
     ATTR_READ = 5;
-    BOND=7;
+    BOND=6;
 }
 
 message ZBClusters {
-    repeated uint32 in_clusters = 1;     // zb_uint8_t[]
-    repeated uint32 out_clusters = 2;    // zb_uint8_t[]
+    repeated uint32 in_clusters = 1; 
+    repeated uint32 out_clusters = 2;
 }
 
 message ZBDeviceDetails {    
     MsgType msg_type = 1;
     uint64 ieee_addr = 2;
-    uint32 short_addr = 3;            // zb_uint16_t
-    uint32 capability = 4;            // zb_uint8_t
-    uint32 app_profile_id = 5;        // zb_uint16_t
-    uint32 app_device_id = 6;         // zb_uint16_t
-    uint32 app_device_version = 7;    // zb_uint8_t
+    uint32 short_addr = 3;
+    uint32 capability = 4;
+    uint32 app_profile_id = 5; 
+    uint32 app_device_id = 6;  
+    uint32 app_device_version = 7; 
     map<uint32,ZBClusters> endpoints = 8;
 }
 
