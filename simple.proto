@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+enum MsgType {
+    PINGPONG = 0;
+    DEVICE_DB_ENTRY_DETAILS = 1;
+    DEVICE_DB_ENTRY_REMOVED = 2;
+    CMD = 4;
+}
+
+message ZBClusters {
+    repeated uint32 in_clusters = 1;
+    repeated uint32 out_clusters = 2;
+}
+
+message ZBDeviceDetails {    
+    MsgType msg_type = 1;
+    uint64 ieee_addr = 2;
+    uint32 short_addr = 3;
+    uint32 capability = 4;
+    uint32 app_profile_id = 5;
+    uint32 app_device_id = 6;
+    uint32 app_device_version = 7;
+    map<uint32,ZBClusters> endpoints = 8;
+}
