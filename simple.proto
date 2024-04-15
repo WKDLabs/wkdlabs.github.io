@@ -29,9 +29,8 @@ message ZBDeviceDetails {
 message ZBDeviceCommand
 {    
     MsgType msg_type = 1;
-
     uint64 ieee_addr = 2;
-    uint32 short_addr = 3;            // zb_uint16_t
+    uint32 short_addr = 3;
     uint32 endpoint = 4;
     uint32 cluster = 5;
     uint32 cmd_id = 6;
