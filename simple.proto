@@ -34,5 +34,5 @@ message ZBDeviceCommand
     uint32 endpoint = 4;
     uint32 cluster = 5;
     uint32 cmdId = 6;
-    repeated bytes payload = 7;
+    bytes payload = 7;
 }
