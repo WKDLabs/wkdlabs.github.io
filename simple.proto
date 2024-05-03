@@ -34,5 +34,7 @@ message ZBDeviceCommand
     uint32 endpoint = 4;
     uint32 cluster = 5;
     uint32 cmdId = 6;
-    repeated uint32 payload = 7;
+    uint32 profileId = 7;
+    uint32 groupAddr = 8;            // zb_uint16_t
+    repeated uint32 payload = 9;
 }
