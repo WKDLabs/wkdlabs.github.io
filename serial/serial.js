@@ -19,7 +19,11 @@ var serial = {};
       { 'vendorId': 0x2fe3 }, // Nordic
     ];
     return navigator.usb.requestDevice({ 'filters': filters }).then(
-      device => new serial.Port(device)
+
+      device => { 
+            console.log("device:", JSON.stringify(device));
+			new serial.Port(device)
+			}
     );
   }
 
@@ -52,7 +56,7 @@ var serial = {};
           
           interfaces.forEach(element => {
             element.alternates.forEach(elementalt => {
-              if (elementalt.interfaceClass==0xeF) {
+              if (elementalt.interfaceClass==0xFF) {
                 console.log(JSON.stringify(elementalt));
                 this.interfaceNumber = element.interfaceNumber;
                 elementalt.endpoints.forEach(elementendpoint => {
