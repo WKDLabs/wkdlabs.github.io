@@ -48,6 +48,8 @@ var serial = {};
         })
         .then(() => {
           var interfaces = this.device_.configuration.interfaces;
+          console.log("interfaces:", JSON.stringify(interfaces));
+          
           interfaces.forEach(element => {
             element.alternates.forEach(elementalt => {
               if (elementalt.interfaceClass==0xeF) {
