@@ -1,29 +1,278 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            background-color: black;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>WKD Labs</title>
 
-        .imgbox {
-            display: grid;
-            height: 100%;
-        }
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-        .center-fit {
-            max-width: 100%;
-            max-height: 100vh;
-            margin: auto;
-        }
-    </style>
 </head>
 <body>
-
-<div class="imgbox">
-    <img class="center-fit" src='images/background-faded.png'>
+<header>
+    <h1>WKD Labs</h1>
+    <nav>
+        <ul>
+            <li><a href="#about">about</a></li>
+            <li><a href="#projects" id="projects-link">the lab</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <!-- About Section -->
+    <section id="about" class="content-section">
+        <h2>About</h2>
+        <p>Various prototypes, projects and products created in my playtime.</p>
+    </section>
+    <!-- projects Section (active by default) -->
+    <section id="projects" class="content-section active">
+        <h2>the lab</h2>
+        <p>Various prototypes, projects and projects.</p>
+        <div class="project-list" id="project-list">
+            <!-- project boxes will be generated here -->
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="content-section">
+        <h2>Contact</h2>
+        <p>If you have any questions or need more information then please get in touch</p>
+        <p>
+        <ul>
+            <li>📧 <a href="mailto:wayne@wkdlabs.com">e-mail</a></li>
+            <li>🩵 <a href="https://bsky.app/profile/wkdlabs.com">BlueSky</a></li>
+            <li>💼 <a href="https://www.linkedin.com/in/waynekeenan/" target="_blank">LinkedIn</a></li>
+            <li>🐙 <a href="https://github.com/waynekeenan" target="_blank">GitHub: waynekeenan</a></li>
+            <li>🐙 <a href="https://github.com/WKDLabs" target="_blank">GitHub: WKDLabs</a></li>
+            <li>🔧 <a href="https://www.tindie.com/stores/wkdlabs/" target="_blank">Tindie Store</a></li>
+            <li>🛍️ <a href="https://faroutfitsstore.etsy.com" target="_blank">Etsy Store</a></li>
+            <li>📺 <a href="https://www.youtube.com/@wkd_labs" target="_blank">YouTube</a></li>
+        </ul>
+        </p>
+    </section>
+</main>
+<!-- Modal Popup -->
+<div id="modal" class="modal">
+    <span class="modal-close">&times;</span>
+    <div class="modal-content"></div>
 </div>
+
+<!-- JavaScript for Navigation and Generating project Boxes -->
+<script src="config/projects.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        const projectListContainer = document.getElementById('project-list');
+
+        // Function to generate project boxes and set up carousels
+        function generateprojectBoxes() {
+            // Clear the container to ensure it's empty
+            projectListContainer.innerHTML = '';
+            projectConfig.forEach(project => {
+                const projectDiv = document.createElement('div');
+                projectDiv.className = 'project';
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+
+                // project title
+                const title = document.createElement('h3');
+                title.textContent = project.title;
+                projectCard.appendChild(title);
+
+                // project sub title (if available)
+                if (project.subTitle) {
+                    const subTitle = document.createElement('h4');
+                    subTitle.textContent = project.subTitle;
+                    subTitle.className = 'project-subtitle';
+                    projectCard.appendChild(subTitle);
+                }
+
+                // Add dynamic content based on project type
+                if (project.type === 'carousel') {
+                    const carouselDiv = document.createElement('div');
+                    carouselDiv.className = 'carousel';
+
+                    const carouselInner = document.createElement('div');
+                    carouselInner.className = 'carousel-inner';
+                    project.slides.forEach(slide => {
+                        const slideWrapper = document.createElement('div');
+                        slideWrapper.className = 'carousel-slide';
+
+                        const mediaWrapper = document.createElement('div');
+                        mediaWrapper.className = 'media-wrapper';
+
+                        if (slide.type === 'video') {
+                            const videoEl = document.createElement('video');
+                            videoEl.src = slide.url;
+                            videoEl.controls = true;
+                            videoEl.preload = 'auto';
+                            videoEl.style.maxHeight = '100%';
+                            videoEl.style.objectFit = 'contain';
+                            videoEl.load();
+                            mediaWrapper.appendChild(videoEl);
+                        } else {
+                            const img = document.createElement('img');
+                            img.src = slide.url;
+                            img.alt = project.title + " slide";
+                            img.style.maxHeight = '100%';
+                            img.style.objectFit = 'contain';
+                            mediaWrapper.appendChild(img);
+                        }
+
+                        slideWrapper.appendChild(mediaWrapper);
+                        carouselInner.appendChild(slideWrapper);
+                    });
+                    carouselDiv.appendChild(carouselInner);
+
+                    // Navigation buttons for carousel
+                    const prevButton = document.createElement('button');
+                    prevButton.className = 'carousel-button prev';
+                    prevButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+`;
+
+                    carouselDiv.appendChild(prevButton);
+
+                    const nextButton = document.createElement('button');
+                    nextButton.className = 'carousel-button next';
+                    nextButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+`;
+                    carouselDiv.appendChild(nextButton);
+
+                    projectCard.appendChild(carouselDiv);
+                } else if (project.type === 'video') {
+                    const videoContainer = document.createElement('div');
+                    videoContainer.className = 'video-container';
+                    const iframe = document.createElement('iframe');
+                    iframe.src = project.videoUrl;
+                    iframe.frameBorder = "0";
+                    iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+                    iframe.allowFullscreen = true;
+                    videoContainer.appendChild(iframe);
+                    projectCard.appendChild(videoContainer);
+                }
+
+                // project description
+                const desc = document.createElement('p');
+                desc.innerHTML = project.description || "";
+                projectCard.appendChild(desc);
+
+                projectDiv.appendChild(projectCard);
+                projectListContainer.appendChild(projectDiv);
+            });
+
+            // Setup carousel functionality for each carousel element
+            document.querySelectorAll('.carousel').forEach(carousel => {
+                const carouselInner = carousel.querySelector('.carousel-inner');
+                // Select both images and videos
+                const slides = carouselInner.querySelectorAll('img, video');
+                let currentIndex = 0;
+
+                const updateCarousel = () => {
+                    carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                };
+
+                let autoCycle = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                }, 10000);
+
+                const prevButton = carousel.querySelector('.carousel-button.prev');
+                const nextButton = carousel.querySelector('.carousel-button.next');
+
+                prevButton.addEventListener('click', e => {
+                    e.stopPropagation();
+                    clearInterval(autoCycle);
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    updateCarousel();
+                });
+
+                nextButton.addEventListener('click', e => {
+                    e.stopPropagation();
+                    clearInterval(autoCycle);
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                });
+            });
+
+        }
+
+        // Attach click events for navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetID = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetID);
+                if (targetSection) {
+                    // Hide all sections and show the selected one
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    targetSection.classList.add('active');
+                    history.pushState(null, null, '#' + targetID);
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Since "projects" is the default active section, generate project boxes on page load
+        generateprojectBoxes();
+        attachModalListeners();
+
+    });
+
+    function attachModalListeners() {
+        const modal = document.getElementById('modal');
+        const modalContent = modal.querySelector('.modal-content');
+        const modalClose = modal.querySelector('.modal-close');
+
+        // Attach listeners to all images and videos in the carousel
+        document.querySelectorAll('.carousel img, .carousel video').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Clear any existing content
+                modalContent.innerHTML = '';
+
+                // Clone the element or create a new one based on its type
+                let clone;
+                if (item.tagName.toLowerCase() === 'video') {
+                    clone = document.createElement('video');
+                    clone.src = item.src;
+                    clone.controls = true;
+                    clone.autoplay = true;
+                    clone.style.width = '100%';
+                    clone.style.height = 'auto';
+                } else {
+                    clone = document.createElement('img');
+                    clone.src = item.src;
+                    clone.style.width = '100%';
+                    clone.style.height = 'auto';
+                }
+
+                modalContent.appendChild(clone);
+                modal.style.display = 'block';
+            });
+        });
+
+        // Close modal when the close button is clicked
+        modalClose.addEventListener('click', function() {
+            modal.style.display = 'none';
+            modalContent.innerHTML = '';
+        });
+
+        // Close modal when clicking outside the content
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                modalContent.innerHTML = '';
+            }
+        });
+    }
+</script>
+
 
 </body>
 </html>
