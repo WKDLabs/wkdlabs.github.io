@@ -75,7 +75,7 @@ const projectConfig = [
         description: generateDescription(
             "I built a small hardware interface that lets you play a SID synth chip from modern MIDI sources. "
             + "A Pi Pico handles timing and register writes and exposes MIDI over DIN, USB, and BLE, so it works with both "
-            + "classic gear and wireless MINI controllers, like mobile devices and tablets. ",
+            + "classic gear and wireless MIDI controllers, like mobile devices and tablets. ",
             [
                 // "ONE",
                 // "TWO"
