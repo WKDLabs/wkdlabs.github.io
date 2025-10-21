@@ -347,7 +347,7 @@ const projectConfig = [
         title: "Adapter Bits",
         subTitle: "Pi Pico, ESP32 and Feather adapters for micro:bit accessories and prototyping.",
         description: generateDescription(
-            "The micro:bit has been around for a number of years has a large number of accessories have been produced, many of which I have purchased and made projects with.\n" +
+            "The micro:bit has been around for a number of years, a large number of accessories have been produced, many of which I have purchased and made projects with.\n" +
             "\n" +
             "I wanted to make those accessories easily connectable to other microcontrollers such as the Pi Pico, Arduino Nano and the Adafruit Feather form factor. \n" +
             "\n" +
