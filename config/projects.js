@@ -6,14 +6,15 @@ function generateDescription(heading, functionalHighlights = [], projectHighligh
 
     let description = "";
 
-    description += "<hr/><br/>";
-    heading = heading.replaceAll("\n", "<br/>");
-    description += heading;
-
+    if (heading) {
+        description += "<hr/>";
+        heading = heading.replaceAll("\n", "<br/>");
+        description += heading;
+    }
 
     if (functionalHighlights.length > 0) {
 
-        description += "<br/><br/><hr/>Things it does<br/><br/>";
+        description += "<br/><hr/>Things it does<br/><br/>";
 
         description +=
             "<ul> " +
@@ -61,6 +62,7 @@ const projectConfig = [
                 "Zephyr",
                 "C/C++",
                 "React Native",
+                "React Native Custom Controls",
                 "TypeScript"
             ],
             [
@@ -131,7 +133,9 @@ const projectConfig = [
             ],
             [
                 "Typescript",
-                "Webpack, Jest, Husky"
+                "Webpack, Jest, Husky",
+                "WikiMedia platform install & setup",
+                "WikiMedia Cargo Extension setup and usage"
             ],
             [
                 {title: "Open sourced on GitHub", url: "https://github.com/WayneKeenan/ClintonCAT/"},
@@ -143,17 +147,22 @@ const projectConfig = [
     {
         title: "Wordle Board",
         subTitle: "Show the world your Wordle",
-        description: generateDescription("Built a small ESP32 (M5-Stack) device for myself that pulls Wordle score posts from Twitter and shows the results on its LCD in real time.",
+        description: generateDescription(
+            "Built a small ESP32 (M5-Stack) device for myself that pulls Wordle score posts from Twitter and shows the results on its LCD in real time.",
             [
-                "Polls Twitter feed for Wordle score shares",],
-            [
-                "Built for M5-Stack",
-                "Built for ESP32 based watch"
+                "Polls Twitter feed for Wordle score shares",
+                "Runs on M5-Stack",
+                "Runs on ESP32 based watch"
             ],
             [
-                // {title: "title1", url: "https://www.example.com/"},
-                // {title: "title2", url: "https://www.example.com/"},
-            ]
+                "Twitter API",
+                "M5GFX API",
+                "Nobody cares about your Wordle score.",
+            ],
+            // [
+            //     // {title: "title1", url: "https://www.example.com/"},
+            //     // {title: "title2", url: "https://www.example.com/"},
+            // ]
         ),
         type: "carousel",
         slides: [
@@ -286,21 +295,28 @@ const projectConfig = [
 
     {
         title: "Alexa PubGuide",
-        subTitle: "Pub crawl generator Alexa Skill",
-        // description: generateDescription(
-        //     "BLAH",
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         {title: "TITLE", url: "https://URL/"},
-        //     ]
-        // ),
+        subTitle: "Pub finder and crawl generator Alexa Skill",
+        description: generateDescription(
+    null,
+            [
+                "Find pubs by features, e.g. pubs with food",
+                "Creates pub crawls",
+                "Specify crawls location by: city, postcode, train or tube station",
+                "Plots the crawl on a map with pubs as waypoints",
+                "Doesn't cure hangovers"
+            ],
+            [
+                "Alexa Skill building and deployment",
+                "AWS Lambda",
+                "DynamoDB",
+                "Using local backend servers for testing with Alexa devices",
+                "Docker, for cross-compilation of Lambdas",
+                "The BeerInThe Evening API",
+            ],
+            [
+                {title: "Beer in the Evening", url: "https://www.beerintheevening.com/"},
+            ]
+        ),
         type: "carousel",
         slides: [
             {type: 'image', url: './projects/pubguide/1.jpg'},
@@ -310,20 +326,25 @@ const projectConfig = [
     {
         title: "Alexa SIDPlay",
         subTitle: "Stream C64 SID music Alexa Skill",
-        // description: generateDescription(
-        //     "BLAH",
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         {title: "TITLE", url: "https://URL/"},
-        //     ]
-        // ),
+        description: generateDescription(
+            null,
+            [
+                "Play Commodore 64 tunes on your Alexa",
+                "Huge collection of tunes streamed from remix.kwed.org",
+                "Find tracks by title, game or author",
+            ],
+            [
+                "Alexa Skill building and deployment",
+                "AWS Lambda",
+                "DynamoDB",
+                "Using local backend servers for testing with Alexa devices",
+                "Docker, for cross-compilation of Lambdas",
+                "The Lemon SID collection API",
+            ],
+            [
+                {title: "kwed.org", url: "https://remix.kwed.org"},
+            ]
+        ),
         type: "carousel",
         slides: [
             {type: 'image', url: './projects/sidplay/1.png'},
@@ -370,13 +391,13 @@ const projectConfig = [
             "The boards can be bought on Tindie, see links below\n",
             [],
             [
-                "KiCad 6.0",
+                "KiCad 6.0 (Again :) )",
                 "Low tolerance PCB layout constraints for manufacturing"
             ],
             [
-                {title: "ProtoBit", url: "https://www.tindie.com/products/wkdlabs/protobit/"},
-                {title: "PicoBit", url: "https://www.tindie.com/products/wkdlabs/picobit/"},
-                {title: "NanoBit", url: "https://www.tindie.com/products/wkdlabs/nanobit/"},
+                {title: "ProtoBit on Tindie", url: "https://www.tindie.com/products/wkdlabs/protobit/"},
+                {title: "PicoBit on Tindie", url: "https://www.tindie.com/products/wkdlabs/picobit/"},
+                {title: "NanoBit on Tindie", url: "https://www.tindie.com/products/wkdlabs/nanobit/"},
             ]
         ),
         type: "carousel",
@@ -444,7 +465,17 @@ const projectConfig = [
     {
         title: "Astral Pi",
         subTitle: "Telepresence with VR HMD / FPV",
-        description: "https://www.hackster.io/WKDLabs/astralpi-ecaeef",
+        description: generateDescription(
+    null,
+            [
+                // "ONE",
+                // "TWO"
+            ],
+            [],
+            [
+                {title: "HacksterIO project", url: "https://www.hackster.io/WKDLabs/astralpi-ecaeef",},
+            ]
+        ),
         type: "carousel",
         slides: [
             {type: 'image', url: './projects/astralpi/1.jpg'},
@@ -495,20 +526,19 @@ const projectConfig = [
     {
         title: "PuppetXR",
         subTitle: "Meta Quest based Robotic Telepresence",
-        // description: generateDescription(
-        //     "BLAH",
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         {title: "TITLE", url: "https://URL/"},
-        //     ]
-        // ),
+        description: generateDescription(
+            "BLAH",
+            [
+                "Quest Controller integration with Linux Gamepad",
+            ],
+            [
+                "Unity VR",
+                "Linux USB User land drivers",
+            ],
+            // [
+            //     {title: "TITLE", url: "https://URL/"},
+            // ]
+        ),
         type: "carousel",
         slides: [
             {type: 'video', url: './projects/puppetxr/1.mp4', poster: './projects/puppetxr/1.jpg'},
@@ -517,20 +547,18 @@ const projectConfig = [
     {
         title: "PicoPilot",
         subTitle: "WebXR based FPV self-hosted on tiny WiFi enabled robots",
-        // description: generateDescription(
-        //     "BLAH",
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         {title: "TITLE", url: "https://URL/"},
-        //     ]
-        // ),
+        description: generateDescription(
+            "",
+            [
+            ],
+            [
+                "WebXR",
+                "ESP32 Self-signed HTTPS server"
+            ],
+            // [
+            //     {title: "TITLE", url: "https://URL/"},
+            // ]
+        ),
         type: "carousel",
         slides: [
             {type: 'image', url: './projects/picopilot/1.jpg'},
@@ -546,21 +574,20 @@ const projectConfig = [
     {
         title: "Snow Globe",
         subTitle: "Santa in a snow globe streaming live on YouTube .",
-        // description: generateDescription(
-        //     "BLAH",
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         "ONE",
-        //         "TWO"
-        //     ],
-        //     [
-        //         {title: "TITLE", url: "https://URL/"},
-        //     ]
-        // ),
-        descriptionO: "https://www.youtube.com/watch?v=SUc_JAuK9Zs",
+        description: generateDescription(
+            "",
+            [
+                "Live streams Santa from inside a snow sphere to YouTube",
+            ],
+            [
+                "YouTube live streaming from a Raspberry Pi",
+                "Polystyrene balls get everywhere!"
+            ],
+            [
+                {title: "Live Stream (Recording)", url: "https://www.youtube.com/watch?v=SUc_JAuK9Zs"},
+            ]
+        ),
+        descriptionO: "",
         type: "carousel",
         slides: [
             {type: 'image', url: './projects/snowglobe/1.jpg'},
