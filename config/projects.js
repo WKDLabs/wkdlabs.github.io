@@ -13,7 +13,7 @@ function generateDescription(heading, functionalHighlights = [], projectHighligh
 
     if (functionalHighlights.length > 0) {
 
-        description += "<br/><br/><hr/><br/>";
+        description += "<br/><br/><hr/>Things it does<br/><br/>";
 
         description +=
             "<ul> " +
@@ -22,7 +22,7 @@ function generateDescription(heading, functionalHighlights = [], projectHighligh
     }
 
     if (projectHighlights.length > 0) {
-        description += "<br/><hr/><br/>";
+        description += "<br/><hr/>Things I learnt<br/><br/>";
         description +=
             "<ul>" +
             projectHighlights.map(item => `<li>${item}</li>`).join('') +
@@ -30,7 +30,7 @@ function generateDescription(heading, functionalHighlights = [], projectHighligh
     }
 
     if (links.length > 0) {
-        description += "<br/><hr/><br/>";
+        description += "<br/><hr/>Links<br/>";
         // description += "Links";
         description +=
             "<ul> " +
@@ -56,8 +56,12 @@ const projectConfig = [
                 "No wifi", "No Internet"
             ],
             [
+                "BluetoothLE",
+                "ZigBee",
                 "Zephyr",
-                "BluetoothLE & ZigBee"
+                "C/C++",
+                "React Native",
+                "TypeScript"
             ],
             [
             ]
@@ -73,16 +77,24 @@ const projectConfig = [
         title: "RhythmSID",
         subTitle: "Programming the C64 SID synth chip in Python.",
         description: generateDescription(
-            "I built a small hardware interface that lets you play a SID synth chip from modern MIDI sources. "
-            + "A Pi Pico handles timing and register writes and exposes MIDI over DIN, USB, and BLE, so it works with both "
-            + "classic gear and wireless MIDI controllers, like mobile devices and tablets. ",
+            "I built a small hardware interface that lets you play a SID synth chip from modern MIDI sources and programming languages"
+            + "A Pi Pico handles chip timing and register writes and exposes MIDI over DIN, USB, and BLE, so it works with both "
+            + "classic gear and wireless MIDI controllers, like mobile devices and tablets",
             [
-                // "ONE",
-                // "TWO"
+                "Programmable in C/C++, CircuitPython and MicroPython",
+                "Supports MIDI via: UART, USB & BLE",
+                "Works with mobile Midi software on Android and iOS (e.g. GarageBand on iPad"
             ],
             [
-                // "ONE",
-                // "TWO"
+                "Midi via: UART, USB & BLE",
+                "FFT Audio analysis",
+                "Pi Pico SDK",
+                "Pi Pico PIO for SID chip clock and register read/write timing",
+                "USB Isochronous audio data transfers",
+                "SID (MOS 6581) Register programming",
+                "C/C++ & Python",
+                "CircuitPython & MicroPython APIs (C Modules)",
+                "KiCad & PCB Production"
             ],
             [
                 // {title: "TITLE", url: "https://URL/"},
@@ -358,8 +370,8 @@ const projectConfig = [
             "The boards can be bought on Tindie, see links below\n",
             [],
             [
-                "Learning KiCad",
-                "PCB layout constraints for manufacturing"
+                "KiCad 6.0",
+                "Low tolerance PCB layout constraints for manufacturing"
             ],
             [
                 {title: "ProtoBit", url: "https://www.tindie.com/products/wkdlabs/protobit/"},
