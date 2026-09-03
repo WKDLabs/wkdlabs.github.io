@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WKD Labs</title>
+    <meta name="description" content="WKD Labs — hardware, software and experimental builds by Wayne. Prototypes, projects and products from a professional tinkerer.">
+    <link rel="canonical" href="https://wkdlabs.com/">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <!-- Self-hosted fonts + critical CSS inlined to eliminate request chains and CLS -->
+    <style>
+        @font-face{font-family:'Orbitron';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/orbitron-latin.woff2) format('woff2')}
+        @font-face{font-family:'Share Tech Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/share-tech-mono-latin.woff2) format('woff2')}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{min-height:100vh}
+        body{font-family:'Share Tech Mono',monospace;font-weight:400;font-size:16px;color:grey;background-color:black;background:repeating-linear-gradient(45deg,black 0px,black 9px,rgba(12,0,0,0.9) 9px,rgba(12,0,0,0.9) 10px,black 10px,black 19px,rgba(12,3,0,0.9) 19px,rgba(12,3,0,0.9) 20px,black 20px,black 29px,rgba(12,12,0,0.9) 29px,rgba(12,12,0,0.9) 30px,black 30px,black 39px,rgba(0,12,0,0.9) 39px,rgba(0,12,0,0.9) 40px,black 40px,black 49px,rgba(0,0,12,0.9) 49px,rgba(0,0,12,0.9) 50px,black 50px,black 59px,rgba(3,0,12,0.9) 59px,rgba(3,0,12,0.9) 60px,black 60px,black 69px,rgba(12,0,12,0.9) 69px,rgba(12,0,12,0.9) 70px);background-attachment:fixed}
+        header{text-align:center;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #444}
+        header h1{font-family:'Orbitron',sans-serif;font-weight:700;font-size:2.5em;letter-spacing:2px;color:lightgrey;text-shadow:0 0 8px rgba(0,255,255,0.4)}
+        nav{background:rgba(0,0,0,0.5);padding:10px 0}
+        nav ul{list-style:none;display:flex;justify-content:center}
+        nav ul li{margin:0 15px}
+        nav ul li a{color:#fff;text-decoration:none;padding:10px 15px;font-weight:bold;cursor:pointer}
+        .content-section{display:none}
+        .content-section.active{display:block}
+    </style>
+
+    <!-- Preload font files to avoid chain -->
+    <link rel="preload" href="/fonts/orbitron-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/share-tech-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Async main stylesheet -->
+    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+
+</head>
+<body>
+<header>
+    <h1>WKD Labs</h1>
+    <nav>
+        <ul>
+            <li><a href="#about">about</a></li>
+            <li><a href="#projects" id="projects-link">the lab</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <!-- About Section -->
+    <section id="about" class="content-section">
+        <h2>About</h2>
+        <p>Hi, I’m Wayne, a professional tinkerer who can’t stop making things beep, blink, move and come to life.</p>
+        <p>WKD Labs is my playground for hardware, software and experimental builds.</p>
+        <p>I bolt together hardware, code and whatever else is lying around until it behaves, or misbehaves, in interesting ways.</p>
+        <p>Most of my projects start with a “What if we...” and ends with something you can poke, press, play or program.</p>
+        <p>I prototype fast, burn my fingers occasionally, and somehow end up with working gadgets I may actually want to use.</p>
+    </section>
+
+    <section id="projects" class="content-section active">
+        <h2>The Lab</h2>
+        <p>Various prototypes, projects and products created in my playtime.</p>
+        <div class="project-list" id="project-list">
+            <!-- project boxes will be generated here -->
+        </div>
+    </section>
+
+    <section id="contact" class="content-section">
+        <h2>Contact</h2>
+        <p>If you have any questions or need more information then please get in touch</p>
+        <p>
+        <ul>
+            <li>📧 <a href="mailto:wayne@wkdlabs.com">e-mail</a></li>
+            <li>🩵 <a href="https://bsky.app/profile/wkdlabs.com">BlueSky</a></li>
+            <li>💼 <a href="https://www.linkedin.com/in/waynekeenan/" target="_blank">LinkedIn</a></li>
+            <li>🐙 <a href="https://github.com/waynekeenan" target="_blank">GitHub: waynekeenan</a></li>
+            <li>🐙 <a href="https://github.com/WKDLabs" target="_blank">GitHub: WKDLabs</a></li>
+            <li>🔧 <a href="https://www.tindie.com/stores/wkdlabs/" target="_blank">Tindie Store</a></li>
+            <li>🛍️ <a href="https://faroutfitsstore.etsy.com" target="_blank">Etsy Store</a></li>
+            <li>📺 <a href="https://www.youtube.com/@wkd_labs" target="_blank">YouTube</a></li>
+        </ul>
+        </p>
+    </section>
+</main>
+
+<div id="modal" class="modal">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <div class="modal-content"></div>
+</div>
+
+<!-- JavaScript for Navigation and Generating project Boxes -->
+<script src="config/projects.js" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        const projectListContainer = document.getElementById('project-list');
+
+        // Function to generate project boxes and set up carousels
+        function generateprojectBoxes() {
+            // Clear the container to ensure it's empty
+            projectListContainer.innerHTML = '';
+            projectConfig.forEach(project => {
+                const projectDiv = document.createElement('div');
+                projectDiv.className = 'project';
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+
+                // project title
+                const title = document.createElement('h3');
+                title.textContent = project.title;
+                projectCard.appendChild(title);
+
+                // project sub title (if available)
+                if (project.subTitle) {
+                    const subTitle = document.createElement('h4');
+                    subTitle.textContent = project.subTitle;
+                    subTitle.className = 'project-subtitle';
+                    projectCard.appendChild(subTitle);
+                }
+
+                // Add dynamic content based on project type
+                if (project.type === 'carousel') {
+                    const carouselDiv = document.createElement('div');
+                    carouselDiv.className = 'carousel';
+
+                    const carouselInner = document.createElement('div');
+                    carouselInner.className = 'carousel-inner';
+                    project.slides.forEach(slide => {
+                        const slideWrapper = document.createElement('div');
+                        slideWrapper.className = 'carousel-slide';
+
+                        const mediaWrapper = document.createElement('div');
+                        mediaWrapper.className = 'media-wrapper';
+
+                        if (slide.type === 'video') {
+                            const videoEl = document.createElement('video');
+                            videoEl.dataset.src = slide.url;
+                            videoEl.controls = true;
+                            videoEl.preload = 'none';
+                            if (slide.poster) {
+                                videoEl.poster = slide.poster;
+                            }
+                            videoEl.style.maxHeight = '100%';
+                            videoEl.style.objectFit = 'contain';
+                            mediaWrapper.appendChild(videoEl);
+                        } else {
+                            const img = document.createElement('img');
+                            img.dataset.src = slide.url;
+                            img.alt = project.title + " slide";
+                            img.loading = 'lazy';
+                            img.style.maxHeight = '100%';
+                            img.style.objectFit = 'contain';
+                            mediaWrapper.appendChild(img);
+                        }
+
+                        slideWrapper.appendChild(mediaWrapper);
+                        carouselInner.appendChild(slideWrapper);
+                    });
+                    carouselDiv.appendChild(carouselInner);
+
+                    // Navigation buttons for carousel
+                    const prevButton = document.createElement('button');
+                    prevButton.className = 'carousel-button prev';
+                    prevButton.setAttribute('aria-label', 'Previous slide');
+                    prevButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+`;
+
+                    carouselDiv.appendChild(prevButton);
+
+                    const nextButton = document.createElement('button');
+                    nextButton.className = 'carousel-button next';
+                    nextButton.setAttribute('aria-label', 'Next slide');
+                    nextButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+`;
+                    carouselDiv.appendChild(nextButton);
+
+                    projectCard.appendChild(carouselDiv);
+                } else if (project.type === 'video') {
+                    const videoContainer = document.createElement('div');
+                    videoContainer.className = 'video-container';
+                    const iframe = document.createElement('iframe');
+                    iframe.src = project.videoUrl;
+                    iframe.frameBorder = "0";
+                    iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+                    iframe.allowFullscreen = true;
+                    videoContainer.appendChild(iframe);
+                    projectCard.appendChild(videoContainer);
+                }
+
+                // project description
+                const desc = document.createElement('p');
+                desc.innerHTML = project.description || "";
+                projectCard.appendChild(desc);
+
+                projectDiv.appendChild(projectCard);
+                projectListContainer.appendChild(projectDiv);
+            });
+
+            // Lazy-load media with IntersectionObserver
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        card.querySelectorAll('[data-src]').forEach(el => {
+                            el.src = el.dataset.src;
+                            delete el.dataset.src;
+                        });
+                        observer.unobserve(card);
+                    }
+                });
+            }, { rootMargin: '200px' });
+
+            document.querySelectorAll('.project').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Setup carousel functionality for each carousel element
+            document.querySelectorAll('.carousel').forEach(carousel => {
+                const carouselInner = carousel.querySelector('.carousel-inner');
+                // Select both images and videos
+                const slides = carouselInner.querySelectorAll('img, video');
+                let currentIndex = 0;
+
+                const updateCarousel = () => {
+                    carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                };
+
+                let autoCycle = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                }, 10000);
+
+                const prevButton = carousel.querySelector('.carousel-button.prev');
+                const nextButton = carousel.querySelector('.carousel-button.next');
+
+                prevButton.addEventListener('click', e => {
+                    e.stopPropagation();
+                    clearInterval(autoCycle);
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    updateCarousel();
+                });
+
+                nextButton.addEventListener('click', e => {
+                    e.stopPropagation();
+                    clearInterval(autoCycle);
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                });
+            });
+
+        }
+
+        // Attach click events for navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetID = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetID);
+                if (targetSection) {
+                    // Hide all sections and show the selected one
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    targetSection.classList.add('active');
+                    history.pushState(null, null, '#' + targetID);
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Since "projects" is the default active section, generate project boxes on page load
+        generateprojectBoxes();
+        attachModalListeners();
+
+    });
+
+    function attachModalListeners() {
+        const modal = document.getElementById('modal');
+        const modalContent = modal.querySelector('.modal-content');
+        const modalClose = modal.querySelector('.modal-close');
+
+        // Attach listeners to all images and videos in the carousel
+        document.querySelectorAll('.carousel img, .carousel video').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Clear any existing content
+                modalContent.innerHTML = '';
+
+                // Clone the element or create a new one based on its type
+                const mediaSrc = item.src || item.dataset.src;
+                let clone;
+                if (item.tagName.toLowerCase() === 'video') {
+                    clone = document.createElement('video');
+                    clone.src = mediaSrc;
+                    clone.controls = true;
+                    clone.autoplay = true;
+                    clone.style.width = '100%';
+                    clone.style.height = 'auto';
+                } else {
+                    clone = document.createElement('img');
+                    clone.src = mediaSrc;
+                    clone.style.width = '100%';
+                    clone.style.height = 'auto';
+                }
+
+                modalContent.appendChild(clone);
+                modal.style.display = 'block';
+            });
+        });
+
+        // Close modal when the close button is clicked
+        modalClose.addEventListener('click', function() {
+            modal.style.display = 'none';
+            modalContent.innerHTML = '';
+        });
+
+        // Close modal when clicking outside the content
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                modalContent.innerHTML = '';
+            }
+        });
+    }
+</script>
+
+
+</body>
+</html>

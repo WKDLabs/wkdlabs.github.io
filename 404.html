@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - WKD Labs</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <!-- Self-hosted fonts + critical CSS -->
+    <style>
+        @font-face{font-family:'Orbitron';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/orbitron-latin.woff2) format('woff2')}
+        @font-face{font-family:'Share Tech Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/share-tech-mono-latin.woff2) format('woff2')}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{min-height:100vh}
+        body{font-family:'Share Tech Mono',monospace;font-weight:400;font-size:16px;color:grey;background-color:black;background:repeating-linear-gradient(45deg,black 0px,black 9px,rgba(12,0,0,0.9) 9px,rgba(12,0,0,0.9) 10px,black 10px,black 19px,rgba(12,3,0,0.9) 19px,rgba(12,3,0,0.9) 20px,black 20px,black 29px,rgba(12,12,0,0.9) 29px,rgba(12,12,0,0.9) 30px,black 30px,black 39px,rgba(0,12,0,0.9) 39px,rgba(0,12,0,0.9) 40px,black 40px,black 49px,rgba(0,0,12,0.9) 49px,rgba(0,0,12,0.9) 50px,black 50px,black 59px,rgba(3,0,12,0.9) 59px,rgba(3,0,12,0.9) 60px,black 60px,black 69px,rgba(12,0,12,0.9) 69px,rgba(12,0,12,0.9) 70px);background-attachment:fixed}
+        header{text-align:center;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #444}
+        header h1{font-family:'Orbitron',sans-serif;font-weight:700;font-size:2.5em;letter-spacing:2px;color:lightgrey;text-shadow:0 0 8px rgba(0,255,255,0.4)}
+    </style>
+
+    <!-- Preload font files -->
+    <link rel="preload" href="/fonts/orbitron-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/share-tech-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Async main stylesheet -->
+    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <style>
+        .error-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+            padding: 40px;
+        }
+        .error-code {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 8em;
+            color: lightgrey;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .error-message {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2em;
+            color: grey;
+            margin-bottom: 30px;
+        }
+        .error-home {
+            font-family: 'Share Tech Mono', monospace;
+            display: inline-block;
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 30px;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(6px);
+            transition: all 0.2s ease-in-out;
+        }
+        .error-home:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 18px rgba(0, 255, 255, 0.5);
+            color: #ccffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1><a href="/" style="color: inherit; text-decoration: none; text-shadow: inherit;">WKD Labs</a></h1>
+</header>
+<div class="error-page">
+    <div class="error-code">404</div>
+    <p class="error-message">Nothing here. Must have wandered off the bench.</p>
+    <a href="/" class="error-home">back to the lab</a>
+</div>
+</body>
+</html>

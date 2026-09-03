@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glucose Revolution Guide</title>
+<link rel="canonical" href="https://wkdlabs.com/glucose.html">
+<style>
+:root {
+  --green:      #2e7d32; --green-bg:   #e8f5e9;
+  --protein:    #bf360c; --protein-bg: #fbe9e7;
+  --starch:     #e65100; --starch-bg:  #fff8e1;
+  --blue:       #1565c0; --blue-bg:    #e3f2fd;
+  --navy:       #1a1a2e;
+  --gold:       #f9a825;
+  --text:       #2c2c2c;
+  --muted:      #777;
+  --border:     #e8e8e8;
+  --bg:         #f5f5f7;
+  --white:      #ffffff;
+  --radius:     10px;
+  --shadow:     0 1px 4px rgba(0,0,0,0.08);
+  --header-h:   98px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  font-size:15px;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+
+/* Header */
+header{position:sticky;top:0;z-index:200;background:var(--navy);
+  box-shadow:0 2px 12px rgba(0,0,0,0.25)}
+.header-bar{display:flex;align-items:center;gap:12px;padding:10px 16px 8px}
+.header-bar .icon{font-size:26px}
+.header-bar h1{font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.3px}
+.header-bar .sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px}
+.header-bar .sub a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.header-bar .sub a:hover{opacity:.8}
+.back-link{margin-left:auto;display:flex;flex-direction:column;align-items:center;
+  gap:2px;font-size:30px;color:rgba(255,255,255,0.5);text-decoration:none;
+  padding:4px 6px;border-radius:8px;transition:all .2s;line-height:1;flex-shrink:0}
+.back-link span{font-size:9px;font-weight:600;letter-spacing:.4px;
+  text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.back-link:hover{color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.08)}
+.back-link:hover span{color:rgba(255,255,255,0.7)}
+
+/* Main tabs - folder tab style */
+.main-tabs{display:flex;
+  padding:8px 6px 0;gap:3px;align-items:flex-end;
+  border-top:1px solid rgba(255,255,255,0.08)}
+.main-tabs button{flex:1;min-width:0;padding:9px 4px 10px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);border-bottom:none;
+  border-radius:8px 8px 0 0;
+  color:rgba(255,255,255,0.5);font-size:clamp(9px,2.6vw,12px);font-weight:600;
+  cursor:pointer;white-space:nowrap;transition:all .2s;text-align:center;overflow:hidden}
+.main-tabs button:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.11)}
+.main-tabs button.active{color:#fff;background:rgba(255,255,255,0.17);
+  border-color:rgba(255,255,255,0.25);border-top:2px solid var(--gold)}
+
+/* Panels */
+main{min-height:100vh;padding-bottom:48px}
+.panel{display:none}
+.panel.active{display:block}
+
+/* Sub-tabs - folder tab style */
+.sub-tabs{display:flex;gap:3px;padding:8px 6px 0;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  position:sticky;top:var(--header-h);z-index:100;align-items:flex-end}
+.sub-tabs button{flex:1;min-width:0;padding:7px 4px 8px;
+  border:1.5px solid #c8c8c8;border-bottom:none;border-radius:8px 8px 0 0;
+  background:rgba(0,0,0,0.03);font-size:clamp(9px,2.6vw,12px);
+  font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;
+  white-space:nowrap;text-align:center;overflow:hidden}
+.sub-tabs button:hover{background:rgba(0,0,0,0.06);color:var(--text)}
+.sub-tabs button.active{color:#fff}
+.sub-tabs button.s-g1.active{background:var(--green);border-color:#1b5e20;border-top-width:2px}
+.sub-tabs button.s-g2.active{background:var(--protein);border-color:#7f0000;border-top-width:2px}
+.sub-tabs button.s-g3.active{background:var(--starch);border-color:#bf360c;border-top-width:2px}
+.sub-tabs button.s-ref.active{background:var(--blue);border-color:#0d47a1;border-top-width:2px}
+
+/* Sub-panels */
+.sub-panel{display:none;padding:16px}
+.sub-panel.active{display:block}
+
+/* Section header block */
+.sec-head{display:flex;align-items:center;gap:12px;padding:14px 16px;
+  border-radius:var(--radius);margin-bottom:12px}
+.sec-head .ico{font-size:28px;flex-shrink:0}
+.sec-head h2{font-size:16px;font-weight:700}
+.sec-head small{font-size:11px;font-weight:400;opacity:.7}
+.sec-head p{font-size:12px;margin-top:3px;opacity:.8;font-style:italic}
+.g1 .sec-head{background:var(--green-bg);color:var(--green)}
+.g2 .sec-head{background:var(--protein-bg);color:var(--protein)}
+.g3 .sec-head{background:var(--starch-bg);color:var(--starch)}
+.gr .sec-head{background:var(--blue-bg);color:var(--blue)}
+.ar .sec-head{background:#fce4ec;color:#880e4f}
+
+/* Group section dividers */
+.grp-head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;
+  letter-spacing:.3px;text-transform:uppercase;
+  margin:20px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.grp-head:first-child{margin-top:4px}
+.grp-head .ghi{font-size:18px;line-height:1}
+.g1 .grp-head{color:var(--green);border-bottom-color:var(--green-bg)}
+.g2 .grp-head{color:var(--protein);border-bottom-color:var(--protein-bg)}
+.g3 .grp-head{color:var(--starch);border-bottom-color:var(--starch-bg)}
+
+/* Page title */
+.pg-title{display:flex;align-items:center;gap:8px;padding:14px 16px;
+  font-size:16px;font-weight:800;color:var(--navy);background:var(--white);
+  border-bottom:2px solid var(--border);letter-spacing:-.2px}
+.pg-title+.pg-title{margin-top:12px;border-top:2px solid var(--border)}
+
+/* Hack cards */
+.hacks{padding:14px;display:flex;flex-direction:column;gap:10px}
+.hack{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;
+  border-radius:var(--radius);background:var(--white);border-left:4px solid #ccc;
+  box-shadow:var(--shadow)}
+.hack .ico{font-size:22px;flex-shrink:0}
+.hack h3{font-size:13px;font-weight:700;margin-bottom:3px}
+.hack p{font-size:12px;color:#444;line-height:1.55}
+
+/* Eating order */
+.order{padding:14px;display:flex;flex-direction:column;gap:10px}
+.order li{display:flex;align-items:center;gap:14px;padding:14px 16px;
+  border-radius:var(--radius);list-style:none}
+.order li:nth-child(1){background:var(--green-bg);color:var(--green)}
+.order li:nth-child(2){background:var(--protein-bg);color:var(--protein)}
+.order li:nth-child(3){background:var(--starch-bg);color:var(--starch)}
+.order .n{font-size:18px;font-weight:800;opacity:.35;color:inherit;
+  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;border:3px solid currentColor;flex-shrink:0}
+.order .em{font-size:30px}
+.order h3{font-size:14px;font-weight:700;margin-bottom:2px}
+.order p{font-size:12px;opacity:.75}
+
+/* Tip box */
+.tip{margin:0 14px 14px;background:#f3f4f6;border-left:4px solid #9e9e9e;
+  padding:10px 14px;border-radius:0 6px 6px 0;font-size:12px;
+  color:#555;font-style:italic}
+
+/* Activity tables */
+.act{padding:14px 14px 0}
+.act h2{font-size:16px;font-weight:800;margin-bottom:10px;color:var(--navy);
+  display:flex;align-items:center;gap:8px}
+.act+.act{padding-top:18px;margin-top:14px;border-top:2px solid var(--border)}
+.act th:first-child,.act td:first-child{width:40%}
+.act td.f{font-size:15px;font-weight:800}
+.act-ico{font-size:22px;line-height:1;vertical-align:middle;margin-right:2px}
+
+/* Tables */
+.search{width:100%;padding:9px 12px;border-radius:8px;border:1.5px solid var(--border);
+  font-size:14px;margin-bottom:10px;background:var(--white);outline:none}
+.search:focus{border-color:#999}
+.tw{overflow-x:auto;border-radius:8px;border:1px solid var(--border);
+  background:var(--white);margin-bottom:4px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:340px}
+thead th{padding:8px 10px;text-align:left;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.4px;color:var(--muted);
+  border-bottom:1.5px solid var(--border);background:#fafafa;white-space:nowrap}
+tbody td{padding:8px 10px;border-bottom:1px solid #f2f2f2;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td{background:#fafafa}
+tbody tr.hl td{background:#fffde7!important}
+tbody tr.hid{display:none}
+td.f{font-weight:700;font-size:14px;min-width:130px}
+td.no{color:#555;font-size:12px}
+.g1 td.f{color:var(--green)}
+.g2 td.f{color:var(--protein)}
+.g3 td.f{color:var(--starch)}
+
+/* Reference guide (Asian meal guide in Eating Order panel) */
+.ref-guide{background:#f8f9fa;border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;font-size:12px;line-height:1.8;color:var(--text);
+  font-family:inherit;white-space:pre-wrap;overflow-x:auto;margin-bottom:10px}
+.ref-note{font-size:12px;color:var(--muted);font-style:italic;padding:6px 2px}
+
+/* Footer note */
+.fnote{margin:12px 0 0;font-size:12px;color:var(--muted);font-style:italic;
+  text-align:center;padding-top:10px;border-top:1px solid var(--border)}
+
+/* Desktop */
+@media(min-width:640px){
+  .header-bar h1{font-size:20px}
+  .main-tabs button{font-size:14px;padding:10px 20px 12px}
+  .hacks{display:grid;grid-template-columns:1fr 1fr}
+  .hacks .hack:nth-child(odd):last-child{grid-column:1/-1}
+  .order{flex-direction:row}
+  .order li{flex-direction:column;flex:1;text-align:center;justify-content:center}
+  .order .n{width:44px;height:44px;font-size:22px}
+  .order .em{font-size:36px}
+  .sub-panel{max-width:860px;margin:0 auto}
+  table{font-size:14px}
+  td.no{font-size:13px}
+  thead th{font-size:12px}
+  tbody td{padding:9px 12px}
+}
+@media(min-width:1024px){
+  .sub-panel{max-width:980px}
+  .hacks{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bar">
+    <div>
+      <h1>Glucose Revolution (Quick Ref)</h1>
+      <div class="sub">Original book by <a href="https://www.instagram.com/glucosegoddess/" target="_blank" rel="noopener">Glucose Goddess</a></div>
+    </div>
+    <a class="back-link" href="/" title="Back to the lab">⚗️ <span>The Lab</span></a>
+  </div>
+  <nav class="main-tabs">
+    <button class="active" data-tab="hacks">⚡ 10 Hacks</button>
+    <button data-tab="order">🍽️ Eating Order</button>
+    <button data-tab="foods">🥦 Food Groups</button>
+    <button data-tab="asian">🥢 Asian Foods</button>
+  </nav>
+</header>
+
+<main>
+
+<section id="hacks" class="panel active">
+  <div class="pg-title">⚡ Top 10 Hacks</div>
+  <div class="fnote" style="margin:14px 14px 4px">These 10 hacks work independently - every one you apply makes a difference.</div>
+  <div class="hacks">
+    <div class="hack" style="border-left-color:#43a047"><span class="ico">🍽️</span><div><h3>Hack 1 - Eat Foods in the Right Order</h3><p>Same meal, different order = <strong>73% lower glucose spike</strong> &amp; <strong>48% lower insulin spike</strong>. Always eat in this sequence: vegetables &gt; protein &amp; fat &gt; starches &amp; sugars. Even if you can't fully separate everything, just eating carbs last helps significantly.</p></div></div>
+    <div class="hack" style="border-left-color:#66bb6a"><span class="ico">🥗</span><div><h3>Hack 2 - Add a Green Starter to Every Meal</h3><p>Add a vegetable dish <em>before</em> your main meal - a salad, cucumber slices, steamed greens, etc. The fibre arrives first in your gut, slows digestion, and blunts the glucose spike from everything that follows.</p></div></div>
+    <div class="hack" style="border-left-color:#ef5350"><span class="ico">🚫</span><div><h3>Hack 3 - Stop Counting Calories</h3><p>Calories are not the right metric. Two foods with identical calories can have wildly different glucose effects. Focus on the <em>type</em> of food and food order - not the calorie number on the label. Adding a fibre-rich starter actually helps even if it adds calories.</p></div></div>
+    <div class="hack" style="border-left-color:#ff7043"><span class="ico">☀️</span><div><h3>Hack 4 - Flatten Your Breakfast Curve</h3><p>Breakfast sets your glucose tone for the <strong>entire day</strong>. Avoid sweet/starchy breakfasts (cereal, toast, orange juice, pastries). Choose <strong>savoury, protein- and fat-rich breakfasts</strong> - eggs, Greek yogurt, avocado, nuts. If you must have something sweet, add fat and protein alongside it.</p></div></div>
+    <div class="hack" style="border-left-color:#ffa726"><span class="ico">🍯</span><div><h3>Hack 5 - All Sugars Are the Same</h3><p>Honey, agave, coconut sugar, maple syrup, brown sugar - they are all glucose + fructose molecules. Don't be fooled by &quot;natural&quot; or &quot;healthy&quot; sugar marketing. There is no better sugar; the only goal is to consume less of it overall, and use the other hacks to blunt its effect.</p></div></div>
+    <div class="hack" style="border-left-color:#ab47bc"><span class="ico">🍰</span><div><h3>Hack 6 - Pick Dessert Over a Sweet Snack</h3><p>If you're going to eat something sweet, eat it <strong>right after a meal</strong> - not as a standalone snack. After a meal, your gut already has a fibre/protein/fat buffer from the food you ate, which dampens the glucose spike. A sweet snack on an empty stomach hits your bloodstream fast and hard.</p></div></div>
+    <div class="hack" style="border-left-color:#29b6f6"><span class="ico">💧</span><div><h3>Hack 7 - Drink Vinegar Before You Eat</h3><p>Mix <strong>1 tablespoon of any vinegar</strong> (apple cider, white, rice) in a tall glass of water and drink it 10–20 minutes before a sweet or starchy meal. The acetic acid slows the action of the enzymes that break down starch, slows gastric emptying, and reduces glucose spikes. Also curbs cravings and increases fat burning.</p></div></div>
+    <div class="hack" style="border-left-color:#26a69a"><span class="ico">🚶</span><div><h3>Hack 8 - Move After You Eat</h3><p>Muscles burn glucose directly. A <strong>10-minute walk</strong> (or any light movement - squats, calf raises, tidying up) within 70–90 minutes after eating mops up the glucose spike before it causes harm. You don't need intense exercise - any muscle contraction helps.</p></div></div>
+    <div class="hack" style="border-left-color:#8d6e63"><span class="ico">🧀</span><div><h3>Hack 9 - If You Snack, Go Savoury</h3><p>Sweet snacks on their own cause sharp glucose spikes and dips that trigger more cravings. If you must snack, choose <strong>savoury options</strong>: nuts, cheese, boiled eggs, veggies with hummus, olives. These don't spike glucose and keep you full longer.</p></div></div>
+    <div class="hack" style="border-left-color:#78909c"><span class="ico">👕</span><div><h3>Hack 10 - Put Clothes on Your Carbs</h3><p>Never eat carbs &quot;naked&quot; (on their own). Always pair starches and sugars with <strong>fat, protein, or fibre</strong>. A plain biscuit spikes you; a biscuit with almond butter doesn't as much. Add Greek yogurt to fruit, add butter to bread, add nuts to a sweet snack. The &quot;clothing&quot; slows glucose absorption.</p></div></div>
+  </div>
+</section>
+
+<section id="order" class="panel">
+  <div class="pg-title">🍽️ The Eating Order</div>
+  <ol class="order">
+    <li><span class="n">1</span><span class="em">🥦</span><div><h3>Fibre</h3><p>salad, vegetables, green starter</p></div></li>
+    <li><span class="n">2</span><span class="em">🥩</span><div><h3>Protein &amp; Fat</h3><p>meat, fish, eggs, cheese, nuts, oils</p></div></li>
+    <li><span class="n">3</span><span class="em">🍞</span><div><h3>Starches &amp; Sugars</h3><p>bread, pasta, rice, fruit, dessert</p></div></li>
+  </ol>
+  <div class="fnote" style="margin:0 14px 14px"><strong>Core philosophy:</strong> You don't have to change <em>what</em> you eat, just <em>how</em> you eat it - the order, the pairings, the timing, and small actions before and after meals make the biggest difference.</div>
+  <div class="pg-title" style="margin-top:8px">⏱️ Pre &amp; Post Meal Activities</div>
+  <div class="act">
+    <h2>💧 Before Your Meal</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Action</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td class="f"><span class="act-ico">🫙</span> Vinegar drink</td><td class="no">1 tbsp vinegar in a tall glass of water, 10–20 min before eating - or use as a salad dressing on your green starter</td></tr>
+        <tr><td class="f"><span class="act-ico">🥗</span> Eat a green starter</td><td class="no">A salad or vegetable dish before the main course</td></tr>
+        <tr><td class="f"><span class="act-ico">🚫</span> Don't eat sweet things first</td><td class="no">Especially avoid sugar as your very first food of the day</td></tr>
+        <tr><td class="f"><span class="act-ico">🍳</span> Savoury breakfast</td><td class="no">Start the day with protein &amp; fat to set a stable glucose baseline</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="act">
+    <h2>🚶 After Your Meal</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Action</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td class="f"><span class="act-ico">🚶</span> Move for 10 minutes</td><td class="no">A walk, light exercise, or any muscle use - aim to start within 70 min of eating</td></tr>
+        <tr><td class="f"><span class="act-ico">🛋️</span> Avoid lying down</td><td class="no">Don't sit still immediately after eating - even standing helps</td></tr>
+        <tr><td class="f"><span class="act-ico">⏱️</span> Wait between meals</td><td class="no">Allow 3–4 hours between meals so insulin can fully drop</td></tr>
+        <tr><td class="f"><span class="act-ico">💪</span> Craving hit?</td><td class="no">Wait 20 minutes - your liver releases stored glucose and the craving usually passes</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="fnote" style="margin:0 14px 14px">Even deconstructing a sandwich - eating the salad &amp; protein filling first, then the bread - applies this principle.</div>
+</section>
+
+<section id="foods" class="panel">
+  <div class="sub-tabs">
+    <button class="s-g1 active" data-sub="fg1">🥦 Fibre</button>
+    <button class="s-g2"        data-sub="fg2">🥩 Protein &amp; Fat</button>
+    <button class="s-g3"        data-sub="fg3">🍞 Starches</button>
+  </div>
+  <div id="fg1" class="sub-panel g1 active">
+    <div class="sec-head"><span class="ico">🥦</span><div>
+      <h2>Group 1 - Fibre <small>/ Eat First</small></h2>
+      <p>Salad items, vegetables, legumes, and high-fibre foods. Eat before everything else - they create a viscous mesh in the gut that slows absorption of everything eaten after them.</p>
+    </div></div>
+    <input class="search" placeholder="Search foods…" oninput="filter(this)">
+    <div class="grp-head"><span class="ghi">🥗</span> Salad</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Artichoke hearts</td><td class="no">High in fibre, great in salads</td></tr>
+      <tr><td class="f">Capsicum (bell pepper)</td><td class="no">Raw slices are perfect in salads</td></tr>
+      <tr><td class="f">Carrot (raw)</td><td class="no">Grated or sliced - adds crunch and colour to salads</td></tr>
+      <tr><td class="f">Celery</td><td class="no">Crunchy, virtually zero glucose impact</td></tr>
+      <tr><td class="f">Cherry tomatoes</td><td class="no">Sweet and juicy - ideal for salads, low glucose</td></tr>
+      <tr><td class="f">Cucumber</td><td class="no">Hydrating and refreshing, eat raw before a meal</td></tr>
+      <tr><td class="f">Edamame</td><td class="no">High fibre + protein - great in grain bowls and salads</td></tr>
+      <tr><td class="f">Endive / chicory</td><td class="no">Slightly bitter leaf, holds dressings well</td></tr>
+      <tr><td class="f">Fennel</td><td class="no">Raw in salads - digestive benefits, anise flavour</td></tr>
+      <tr><td class="f">Lettuce / mixed greens</td><td class="no">Classic green salad base</td></tr>
+      <tr><td class="f">Olives</td><td class="no">Rich in healthy fat - eat a few as part of your starter</td></tr>
+      <tr><td class="f">Radicchio</td><td class="no">Bitter purple leaf, adds colour and crunch to salads</td></tr>
+      <tr><td class="f">Radish</td><td class="no">Raw and crunchy, adds bite to salads</td></tr>
+      <tr><td class="f">Rocket (arugula)</td><td class="no">Peppery, great raw starter</td></tr>
+      <tr><td class="f">Snow peas (raw)</td><td class="no">Crunchy raw, popular in salads</td></tr>
+      <tr><td class="f">Spring onion / scallion</td><td class="no">Mild, adds flavour and colour to salads</td></tr>
+      <tr><td class="f">Watercress</td><td class="no">Nutrient-dense, excellent raw in salads</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🥦</span> Vegetables</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Asparagus</td><td class="no">Roasted or steamed, excellent starter</td></tr>
+      <tr><td class="f">Bok choy</td><td class="no">Lightly stir-fried or steamed, mild flavour</td></tr>
+      <tr><td class="f">Broccoli</td><td class="no">Steamed, roasted or raw - excellent fibre source</td></tr>
+      <tr><td class="f">Brussels sprouts</td><td class="no">Roasted for a satisfying fibre-rich starter</td></tr>
+      <tr><td class="f">Cabbage</td><td class="no">Raw in slaws or lightly sautéed</td></tr>
+      <tr><td class="f">Cauliflower</td><td class="no">Versatile - roasted, raw, or riced</td></tr>
+      <tr><td class="f">Eggplant (aubergine)</td><td class="no">Roasted or grilled, absorbs flavours well</td></tr>
+      <tr><td class="f">Green beans</td><td class="no">Light, easy side or starter vegetable</td></tr>
+      <tr><td class="f">Kale</td><td class="no">Packed with fibre and nutrients</td></tr>
+      <tr><td class="f">Leek</td><td class="no">Sautéed as a warm starter or soup base</td></tr>
+      <tr><td class="f">Mushrooms</td><td class="no">Sautéed in butter as a warm starter</td></tr>
+      <tr><td class="f">Spinach</td><td class="no">Great as a salad base or wilted starter</td></tr>
+      <tr><td class="f">Swiss chard</td><td class="no">Sautéed with olive oil and garlic</td></tr>
+      <tr><td class="f">Zucchini (courgette)</td><td class="no">Low carb, versatile cooked or raw</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="fg2" class="sub-panel g2">
+    <div class="sec-head"><span class="ico">🥩</span><div>
+      <h2>Group 2 - Protein &amp; Fat <small>/ Eat Second</small></h2>
+      <p>Meat, fish, eggs, dairy, nuts, and healthy fats. Eat after Group 1 - these further slow gastric emptying and reduce the glucose impact of carbs eaten after them.</p>
+    </div></div>
+    <input class="search" placeholder="Search foods…" oninput="filter(this)">
+    <div class="grp-head"><span class="ghi">🥩</span> Protein</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Bacon</td><td class="no">High fat and protein - best in savoury breakfasts</td></tr>
+      <tr><td class="f">Beef (steak, mince)</td><td class="no">Satisfying protein and fat combination</td></tr>
+      <tr><td class="f">Black eyed peas</td><td class="no">High protein + fibre - also count as Group 1; great in soups and stews</td></tr>
+      <tr><td class="f">Chicken breast / thigh</td><td class="no">Lean protein, pairs with any meal</td></tr>
+      <tr><td class="f">Eggs</td><td class="no">Boiled, scrambled, poached - ideal protein</td></tr>
+      <tr><td class="f">Greek yogurt (full fat)</td><td class="no">High protein, pairs well with savoury</td></tr>
+      <tr><td class="f">Lamb</td><td class="no">Rich protein and fat, pairs with roasted veg</td></tr>
+      <tr><td class="f">Lentils &amp; chickpeas</td><td class="no">Protein + fibre combo - also count as Group 1</td></tr>
+      <tr><td class="f">Mackerel</td><td class="no">Oily fish, very high in omega-3 fats</td></tr>
+      <tr><td class="f">Pork (chops, mince)</td><td class="no">Versatile protein for any meal</td></tr>
+      <tr><td class="f">Prawns / shrimp</td><td class="no">Lean protein, quick to cook</td></tr>
+      <tr><td class="f">Red kidney beans</td><td class="no">High protein + fibre - also count as Group 1; great in stews and salads</td></tr>
+      <tr><td class="f">Salmon</td><td class="no">Rich in healthy omega-3 fats</td></tr>
+      <tr><td class="f">Sardines</td><td class="no">Protein and fat-rich, great on salads</td></tr>
+      <tr><td class="f">Tofu</td><td class="no">Plant-based protein, absorbs flavours well</td></tr>
+      <tr><td class="f">Tuna</td><td class="no">Canned or fresh - quick protein source</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🧈</span> Fat</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Almonds</td><td class="no">Great savoury snack or meal addition</td></tr>
+      <tr><td class="f">Avocado</td><td class="no">Healthy fat, fibre, and creamy texture</td></tr>
+      <tr><td class="f">Butter</td><td class="no">Pair with vegetables or bread (eat bread last)</td></tr>
+      <tr><td class="f">Cashews</td><td class="no">Higher carb than other nuts - eat in moderation</td></tr>
+      <tr><td class="f">Cheese (cheddar, feta, brie)</td><td class="no">Fat-rich, low glucose impact</td></tr>
+      <tr><td class="f">Coconut oil</td><td class="no">Stable fat for cooking at high heat</td></tr>
+      <tr><td class="f">Cream cheese</td><td class="no">Fat-rich, great paired with savoury snacks</td></tr>
+      <tr><td class="f">Olive oil</td><td class="no">Drizzle on starters, slows digestion</td></tr>
+      <tr><td class="f">Pecans</td><td class="no">High fat, low carb - excellent nut choice</td></tr>
+      <tr><td class="f">Pumpkin seeds</td><td class="no">Protein and healthy fat, great on salads</td></tr>
+      <tr><td class="f">Walnuts</td><td class="no">High in omega-3 fats</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="fg3" class="sub-panel g3">
+    <div class="sec-head"><span class="ico">🍞</span><div>
+      <h2>Group 3 - Starches &amp; Sugars <small>/ Eat Last</small></h2>
+      <p>Grains, starchy carbs, fruit, and sweets. Eating these last - after fibre, protein and fat - reduces their glucose spike by up to 73%.</p>
+    </div></div>
+    <input class="search" placeholder="Search foods…" oninput="filter(this)">
+    <div class="grp-head"><span class="ghi">🌾</span> Grains</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Bread (sourdough, wholegrain)</td><td class="no">Always eat last - never on an empty stomach</td></tr>
+      <tr><td class="f">Corn / corn tortillas</td><td class="no">Starchy - pair with protein or eat last</td></tr>
+      <tr><td class="f">Couscous</td><td class="no">Refined grain - always eat after fibre and protein</td></tr>
+      <tr><td class="f">Oats / porridge</td><td class="no">Best eaten savoury or after protein/fat</td></tr>
+      <tr><td class="f">Pasta</td><td class="no">Eat al dente and save for end of meal</td></tr>
+      <tr><td class="f">Pita / flatbread</td><td class="no">Pair with hummus and eat after veggies</td></tr>
+      <tr><td class="f">Quinoa</td><td class="no">Higher protein than most grains, still a starch</td></tr>
+      <tr><td class="f">White rice</td><td class="no">Eat after protein and veg to flatten spike</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🥔</span> Carbs</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Crackers / rice cakes</td><td class="no">&quot;Naked carbs&quot; - always add fat or protein</td></tr>
+      <tr><td class="f">Noodles (rice / egg)</td><td class="no">Treat like pasta - eat al dente and eat last</td></tr>
+      <tr><td class="f">Potato</td><td class="no">Roasted, mashed or boiled - always eat last</td></tr>
+      <tr><td class="f">Sweet potato</td><td class="no">Higher fibre than white potato but still a starch</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🍎</span> Fruits</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Apple</td><td class="no">Whole apple (not juice) - fibre helps, still eat last</td></tr>
+      <tr><td class="f">Banana</td><td class="no">High sugar - eat after a meal, not as a snack</td></tr>
+      <tr><td class="f">Blackberries</td><td class="no">Low sugar, high fibre - one of the best berry choices</td></tr>
+      <tr><td class="f">Blueberries</td><td class="no">Antioxidant-rich, lower GI than most fruits - still eat after a meal</td></tr>
+      <tr><td class="f">Cherries</td><td class="no">Moderate sugar - eat a small portion as dessert</td></tr>
+      <tr><td class="f">Dates</td><td class="no">Very concentrated sugar - small amounts only</td></tr>
+      <tr><td class="f">Fruit juice</td><td class="no">No fibre barrier - spikes fast, limit intake</td></tr>
+      <tr><td class="f">Grapes</td><td class="no">High glucose - treat as dessert</td></tr>
+      <tr><td class="f">Mango</td><td class="no">Sweet tropical fruit - dessert, not a starter</td></tr>
+      <tr><td class="f">Orange / citrus</td><td class="no">Better than juice - eat whole, after a meal</td></tr>
+      <tr><td class="f">Pineapple</td><td class="no">High sugar tropical fruit - treat as dessert</td></tr>
+      <tr><td class="f">Raspberries</td><td class="no">Very low sugar, high fibre - best berry for glucose control</td></tr>
+      <tr><td class="f">Strawberries</td><td class="no">Low sugar, high vitamin C - excellent lower-spike fruit choice</td></tr>
+      <tr><td class="f">Watermelon</td><td class="no">High glycaemic - eat sparingly after a meal</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🍰</span> Sweets</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Dark chocolate</td><td class="no">Eat as dessert, not a standalone snack</td></tr>
+      <tr><td class="f">Honey / maple syrup</td><td class="no">All sugars are equal - use sparingly, always last</td></tr>
+      <tr><td class="f">Ice cream</td><td class="no">Eat as dessert after a meal, never on empty stomach</td></tr>
+      <tr><td class="f">Jam / fruit spreads</td><td class="no">Pure sugar - small amounts, always with food</td></tr>
+    </tbody></table></div>
+  </div></section>
+
+<section id="asian" class="panel">
+  <div class="sub-tabs">
+    <button class="s-g1 active" data-sub="ag1">🥬 Fibre</button>
+    <button class="s-g2"        data-sub="ag2">🦐 Protein &amp; Fat</button>
+    <button class="s-g3"        data-sub="ag3">🍚 Starches</button>
+  </div>
+  <div id="ag1" class="sub-panel g1 active">
+    <div class="sec-head"><span class="ico">🥬</span><div>
+      <h2>Group 1 - Fibre <small>/ Eat First</small></h2>
+      <p>Asian vegetables, fungi, seaweed, and salad items. Eat before everything else.</p>
+    </div></div>
+    <input class="search" placeholder="Search foods…" oninput="filter(this)">
+    <div class="grp-head"><span class="ghi">🥗</span> Salad &amp; Raw</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Bean sprouts</td><td class="no">Raw in salads or lightly blanched - almost zero glucose impact</td></tr>
+      <tr><td class="f">Black fungus (wood ear)</td><td class="no">Rehydrated &amp; eaten in cold salads - near zero glucose impact</td></tr>
+      <tr><td class="f">Cloud ear fungus</td><td class="no">Silky texture, eaten rehydrated - excellent fibre, blunts spikes beautifully</td></tr>
+      <tr><td class="f">Daikon radish</td><td class="no">Raw, pickled, or braised - crunchy, low carb, great as a starter</td></tr>
+      <tr><td class="f">Edamame</td><td class="no">High fibre + protein combo - ideal first-course snack</td></tr>
+      <tr><td class="f">Kombu (dried kelp)</td><td class="no">Used in dashi stock - adds fibre and umami to broths</td></tr>
+      <tr><td class="f">Nori (dried seaweed)</td><td class="no">Wrap around protein - fibre-rich, low glucose</td></tr>
+      <tr><td class="f">Seaweed / wakame</td><td class="no">In miso soup or salads - rich in fibre and minerals</td></tr>
+      <tr><td class="f">Snow peas</td><td class="no">Crunchy raw or lightly stir-fried - popular in Asian cooking</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🥦</span> Vegetables</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Bamboo shoots</td><td class="no">Low calorie, high fibre - add to stir-fries and soups</td></tr>
+      <tr><td class="f">Bitter melon (bitter gourd)</td><td class="no">Stir-fried or stuffed - actually lowers blood glucose, eat first</td></tr>
+      <tr><td class="f">Bok choy (pak choi)</td><td class="no">Steam, stir-fry or eat raw - classic Asian green starter</td></tr>
+      <tr><td class="f">Chinese cabbage (wombok)</td><td class="no">Raw in salads, pickled as kimchi, or braised</td></tr>
+      <tr><td class="f">Choy sum</td><td class="no">Lightly blanched with oyster sauce - ideal first-course veg</td></tr>
+      <tr><td class="f">Chrysanthemum greens (tong hao)</td><td class="no">Hotpot staple - eat in the first round before noodles or rice</td></tr>
+      <tr><td class="f">Dried shiitake mushrooms</td><td class="no">Rehydrate &amp; use in broths or stir-fries - meaty texture, fibre-rich</td></tr>
+      <tr><td class="f">Enoki mushrooms</td><td class="no">Delicate, mild - great raw in salads or lightly cooked in hotpot</td></tr>
+      <tr><td class="f">Gai lan (Chinese broccoli)</td><td class="no">Steamed or stir-fried - high fibre, nutrient-dense</td></tr>
+      <tr><td class="f">Long beans (snake beans)</td><td class="no">Stir-fry with garlic or chilli - high fibre, low glucose</td></tr>
+      <tr><td class="f">Lotus root (thin/young slices)</td><td class="no">Use young thin slices as a fibre starter - mature large roots are starchy</td></tr>
+      <tr><td class="f">Morning glory (water spinach)</td><td class="no">Stir-fried with garlic - popular across SE Asia, fibre-rich</td></tr>
+      <tr><td class="f">Oyster mushrooms</td><td class="no">Stir-fry or steam - meaty, high fibre, low glucose</td></tr>
+      <tr><td class="f">Pea shoots (dou miao)</td><td class="no">Stir-fried with garlic - tender greens, very low glucose impact</td></tr>
+      <tr><td class="f">Turnip (Chinese white turnip)</td><td class="no">Braised or in soup - lower carb than potato, eat early in meal</td></tr>
+      <tr><td class="f">Yu choy (oil seed rape)</td><td class="no">Blanched or stir-fried - mild, fibre-rich green</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="ag2" class="sub-panel g2">
+    <div class="sec-head"><span class="ico">🦐</span><div>
+      <h2>Group 2 - Protein &amp; Fat <small>/ Eat Second</small></h2>
+      <p>Tofu, seafood, meat, eggs, and Asian protein and fat sources. Eat after Group 1.</p>
+    </div></div>
+    <input class="search" placeholder="Search foods…" oninput="filter(this)">
+    <div class="grp-head"><span class="ghi">🥩</span> Protein</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Abalone (braised)</td><td class="no">Luxury protein - braised in oyster sauce, eat before starchy sides</td></tr>
+      <tr><td class="f">Bean curd / firm tofu</td><td class="no">Steam, stir-fry or braise - high protein, low glucose impact</td></tr>
+      <tr><td class="f">Bean curd skin / tofu sheets</td><td class="no">Wrap around fillings or simmer in broth - high protein, low carb</td></tr>
+      <tr><td class="f">Char siu (BBQ pork)</td><td class="no">Protein &amp; fat - has some sugar glaze, but eat before rice</td></tr>
+      <tr><td class="f">Chicken (Hainanese poached)</td><td class="no">Poached in ginger broth - lean protein, eat before the rice</td></tr>
+      <tr><td class="f">Dried tofu sticks (yuba)</td><td class="no">Rehydrate &amp; braise - concentrated soy protein, excellent texture</td></tr>
+      <tr><td class="f">Duck (roasted / braised)</td><td class="no">Rich protein &amp; fat - eat duck before the rice or bao</td></tr>
+      <tr><td class="f">Eggs (steamed, century, salted)</td><td class="no">Century &amp; salted eggs are Asian classics - all are ideal protein</td></tr>
+      <tr><td class="f">Fish (steamed whole)</td><td class="no">Cantonese steamed fish with ginger &amp; soy - clean protein, healthy fats</td></tr>
+      <tr><td class="f">Ikan bilis (dried anchovies)</td><td class="no">Crispy, salty protein - sprinkle on dishes, no glucose spike</td></tr>
+      <tr><td class="f">Mackerel / ikan kembung</td><td class="no">Oily fish common in SE Asian cooking - very high in omega-3</td></tr>
+      <tr><td class="f">Oysters (fresh / steamed)</td><td class="no">Rich in zinc &amp; protein - eat before rice or noodle courses</td></tr>
+      <tr><td class="f">Pork belly (red braised)</td><td class="no">Fat &amp; protein rich - eat before rice; sauce may have sugar</td></tr>
+      <tr><td class="f">Prawns / shrimp</td><td class="no">Stir-fried, steamed or in soup - lean protein, cooks quickly</td></tr>
+      <tr><td class="f">Salmon (miso-glazed)</td><td class="no">Rich in omega-3 fats - miso glaze adds flavour without much sugar</td></tr>
+      <tr><td class="f">Silken tofu</td><td class="no">Cold with soy &amp; ginger, or in hot broth - gentle protein source</td></tr>
+      <tr><td class="f">Soft tofu with century egg</td><td class="no">Classic Cantonese dish - protein-rich combination, ideal second course</td></tr>
+      <tr><td class="f">Soy beans</td><td class="no">Whole cooked soybeans - high protein, also rich in fibre; great in soups and salads</td></tr>
+      <tr><td class="f">Squid / calamari</td><td class="no">Stir-fried or in hotpot - lean protein, virtually no carbs</td></tr>
+      <tr><td class="f">Tempeh</td><td class="no">Fermented soy - firmer &amp; higher protein than tofu, great stir-fried</td></tr>
+      <tr><td class="f">Tofu puffs (tau pok)</td><td class="no">Absorb sauces beautifully - protein &amp; fat, no glucose spike</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🧈</span> Fat</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Fermented black beans (douchi)</td><td class="no">Intense umami condiment - fat &amp; protein, tiny amounts used</td></tr>
+      <tr><td class="f">Fermented tofu (nam yu / fu ru)</td><td class="no">Intense flavour condiment - fat-rich, no glucose spike</td></tr>
+      <tr><td class="f">Miso paste</td><td class="no">In soups or marinades - fermented soy protein, low glucose</td></tr>
+      <tr><td class="f">Peanuts / groundnuts</td><td class="no">In satay sauces or as a garnish - protein &amp; fat, moderate carbs</td></tr>
+      <tr><td class="f">Sesame paste / tahini</td><td class="no">In cold noodle sauces - eat the sauce before the noodles</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="ag3" class="sub-panel g3">
+    <div class="sec-head"><span class="ico">🍚</span><div>
+      <h2>Group 3 - Starches &amp; Sugars <small>/ Eat Last</small></h2>
+      <p>Rice, noodles, tropical fruits, and Asian sweets. Always eat these last.</p>
+    </div></div>
+    <input class="search" placeholder="Search foods…" oninput="filter(this)">
+    <div class="grp-head"><span class="ghi">🍜</span> Noodles &amp; Rice</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Bao (steamed buns)</td><td class="no">Fluffy wheat starch - eat the filling first, bun last</td></tr>
+      <tr><td class="f">Congee / rice porridge</td><td class="no">Very fast glucose release - top with lots of protein &amp; eat slowly</td></tr>
+      <tr><td class="f">Glass noodles (mung bean vermicelli)</td><td class="no">Lower GI than rice noodles - still a starch, eat last</td></tr>
+      <tr><td class="f">Rice noodles (fresh / dried)</td><td class="no">Char kway teow, pho, pad thai base - always eat after veg &amp; protein</td></tr>
+      <tr><td class="f">Rice paper / spring roll wrappers</td><td class="no">Pure rice starch - fill with plenty of veg &amp; protein to blunt spike</td></tr>
+      <tr><td class="f">Soba noodles (buckwheat)</td><td class="no">Lower GI than most noodles - still eat after protein &amp; veg</td></tr>
+      <tr><td class="f">Sticky / glutinous rice</td><td class="no">Very high GI - always eat last, pair with plenty of protein dishes</td></tr>
+      <tr><td class="f">Udon noodles</td><td class="no">Thick wheat noodles - eat the broth, veg &amp; protein first</td></tr>
+      <tr><td class="f">Vermicelli (thin rice noodles)</td><td class="no">Eat the broth &amp; toppings first, noodles last</td></tr>
+      <tr><td class="f">White jasmine rice</td><td class="no">High GI - eating last after fibre &amp; protein cuts the spike dramatically</td></tr>
+      <tr><td class="f">Wonton / dumpling wrappers</td><td class="no">Thin wheat starch - eat the filling first, wrapper last</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🍑</span> Tropical Fruits</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Dragon fruit</td><td class="no">Lower sugar than most tropical fruits - still eat after the main meal</td></tr>
+      <tr><td class="f">Durian</td><td class="no">High sugar &amp; fat - rich dessert, eat only after a full protein meal</td></tr>
+      <tr><td class="f">Goji / wolf berries</td><td class="no">High in sugar despite health halo - eat at end of meal or in small amounts</td></tr>
+      <tr><td class="f">Jackfruit (ripe)</td><td class="no">Very sweet tropical fruit - eat as dessert; unripe jackfruit is lower GI</td></tr>
+      <tr><td class="f">Longan</td><td class="no">Sweet &amp; concentrated sugar - treat as dessert, a few after a meal</td></tr>
+      <tr><td class="f">Lychee</td><td class="no">High fructose - eat as dessert in small amounts, not as a starter</td></tr>
+      <tr><td class="f">Mango</td><td class="no">Very high sugar tropical fruit - treat as dessert, eat last</td></tr>
+      <tr><td class="f">Water chestnuts</td><td class="no">Crunchy &amp; sweet - moderate starch, eat late in the meal</td></tr>
+    </tbody></table></div>
+    <div class="grp-head"><span class="ghi">🍡</span> Asian Sweets</div>
+    <div class="tw"><table><thead><tr><th>Food</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="f">Coconut milk desserts (bubur cha cha)</td><td class="no">Taro + sweet potato + sugar in coconut milk - high spike, occasional treat</td></tr>
+      <tr><td class="f">Lotus root (mature, large)</td><td class="no">Starchy when mature - eat in small amounts, after veg &amp; protein</td></tr>
+      <tr><td class="f">Mochi / tang yuan</td><td class="no">Glutinous rice + sugar - high spike, eat as occasional dessert only</td></tr>
+      <tr><td class="f">Nian gao (new year cake)</td><td class="no">Glutinous rice + sugar - festive treat, eat last in very small portions</td></tr>
+      <tr><td class="f">Red bean paste (hong dou sha)</td><td class="no">Very high sugar - small amounts only, always as dessert</td></tr>
+      <tr><td class="f">Taro</td><td class="no">Starchy root - in desserts or savoury dishes, always eat after protein</td></tr>
+    </tbody></table></div>
+  </div></section>
+
+</main>
+
+<script>
+/* Main tab switching */
+document.querySelectorAll('.main-tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.main-tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* Sub-tab switching (scoped to parent panel) */
+document.querySelectorAll('.sub-tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const panel = btn.closest('.panel');
+    panel.querySelectorAll('.sub-tabs button').forEach(b => b.classList.remove('active'));
+    panel.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.sub).classList.add('active');
+  });
+});
+
+/* Search - filters all tables within the current sub-panel */
+function filter(input) {
+  const q = input.value.trim().toLowerCase();
+  input.closest('.sub-panel').querySelectorAll('tbody tr').forEach(row => {
+    const name = (row.querySelector('.f') || {}).textContent || '';
+    row.classList.toggle('hid', q.length > 0 && !name.toLowerCase().includes(q));
+  });
+}
+</script>
+</body>
+</html>
