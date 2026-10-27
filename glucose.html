@@ -57,6 +57,12 @@ header{position:sticky;top:0;z-index:200;background:var(--navy);
 .main-tabs button:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.11)}
 .main-tabs button.active{color:#fff;background:rgba(255,255,255,0.17);
   border-color:rgba(255,255,255,0.25);border-top:2px solid var(--gold)}
+/* Short tab labels on narrow screens, full labels once they fit */
+.main-tabs .lng{display:none}
+@media(min-width:720px){
+  .main-tabs .lng{display:inline}
+  .main-tabs .sht{display:none}
+}
 
 /* Panels */
 main{min-height:100vh;padding-bottom:48px}
@@ -213,10 +219,11 @@ td.no{color:#555;font-size:12px}
     <a class="back-link" href="/" title="Back to the lab">⚗️ <span>The Lab</span></a>
   </div>
   <nav class="main-tabs">
-    <button class="active" data-tab="hacks">⚡ 10 Hacks</button>
-    <button data-tab="order">🍽️ Eating Order</button>
-    <button data-tab="foods">🥦 Food Groups</button>
-    <button data-tab="asian">🥢 Asian Foods</button>
+    <button class="active" data-tab="hacks">⚡ <span class="lng">10 Hacks</span><span class="sht">Hacks</span></button>
+    <button data-tab="order">🍽️ <span class="lng">Eating Order</span><span class="sht">Order</span></button>
+    <button data-tab="foods">🥦 <span class="lng">Food Groups</span><span class="sht">Foods</span></button>
+    <button data-tab="asian">🥢 <span class="lng">Asian Foods</span><span class="sht">Asian</span></button>
+    <button data-tab="fruit">🍎 <span class="lng">Fruit Tips</span><span class="sht">Fruit</span></button>
   </nav>
 </header>
 
@@ -539,6 +546,32 @@ td.no{color:#555;font-size:12px}
       <tr><td class="f">Taro</td><td class="no">Starchy root - in desserts or savoury dishes, always eat after protein</td></tr>
     </tbody></table></div>
   </div></section>
+
+<section id="fruit" class="panel">
+  <div class="pg-title">🍎 Top 5 Fruits That Lower Blood Sugar</div>
+  <div class="fnote" style="margin:14px 14px 4px">You can lower blood sugar by <em>adding</em> the right foods, not just avoiding the wrong ones. With each fruit, <strong>how much</strong>, <strong>when</strong>, and <strong>what you eat it with</strong> decides whether it works. Source: <a href="https://www.youtube.com/watch?v=LuRZWmMdaSg" target="_blank" rel="noopener">Top 5 Fruits That Drop Blood Sugar</a> - Dr. Leonid Kim MD.</div>
+  <div class="hacks">
+    <div class="hack" style="border-left-color:#43a047"><span class="ico">🍏</span><div><h3>Apple - Eat It Before Your Carbs</h3><p>Pectin (soluble fibre) forms a gel in the gut that slows carb digestion, and the polyphenol phlorizin slows the SGLT1 transporter that pulls glucose into the body. In a study, eating an apple before white rice cut the <strong>glucose spike by 51%</strong> and the total rise by 52%. Eat a <strong>whole apple, skin on, 20–30 min before your highest-carb meal</strong>.</p></div></div>
+    <div class="hack" style="border-left-color:#7cb342"><span class="ico">🥝</span><div><h3>Kiwi - A Small, Regular Dose</h3><p>Rich in vitamin C and polyphenols that protect the insulin-making beta cells in the pancreas and reduce inflammation. Whole kiwi gave a <strong>50% lower spike</strong> than the same sugars on their own - fibre and organic acids contributed equally. Even <strong>1 kiwi a week</strong> was linked with lower insulin resistance. Eating it with dinner may also help sleep.</p></div></div>
+    <div class="hack" style="border-left-color:#e53935"><span class="ico">🍓</span><div><h3>Strawberries - Daily, for Insulin Sensitivity</h3><p>Anthocyanins (the red pigment) activate AMPK, which moves GLUT4 glucose transporters to the surface of muscle cells - so less insulin is needed. In pre-diabetes, ~2.5 servings a day for 12 weeks lowered blood sugar by <strong>9 points</strong> and improved inflammation and insulin resistance. Aim for <strong>1–2 cups a day</strong> - consistency matters. Great with Greek yogurt; frozen is fine.</p></div></div>
+    <div class="hack" style="border-left-color:#c2185b"><span class="ico">🫐</span><div><h3>Raspberries - Target the Liver</h3><p>With hepatic insulin resistance the liver keeps releasing glucose even when blood sugar is high. Anthocyanins and ellagitannins reduce inflammation and may help the liver respond to insulin. Adding <strong>1 cup</strong> to a high-carb breakfast cut the insulin needed; <strong>2 cups</strong> also lowered the spike. ~<strong>8 g fibre per cup</strong>. Aim for 1–2 cups most days, on oatmeal or in a smoothie.</p></div></div>
+    <div class="hack" style="border-left-color:#ffa726"><span class="ico">🥭</span><div><h3>Mango - A Swap, Not an Add-On</h3><p>Mangiferin slows alpha-amylase and alpha-glucosidase, the enzymes that break carbs into glucose (the same target as the drug acarbose - though mango is not medication). Daily fresh mango vs a calorie-matched granola bar for 24 weeks gave <strong>lower fasting glucose</strong> and better insulin sensitivity; A1C held steady while it rose in the granola group. Have <strong>~1 cup fresh mango instead of</strong> a pastry, toast or granola bar, paired with Greek yogurt or cottage cheese. Avoid juice and sweetened dried mango.</p></div></div>
+  </div>
+  <div class="act">
+    <h2>🗓️ When &amp; How</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Fruit</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td class="f"><span class="act-ico">🍏</span> Apple</td><td class="no">Before meals - 20–30 min ahead of your highest-carb meal</td></tr>
+        <tr><td class="f"><span class="act-ico">🥝</span> Kiwi</td><td class="no">Regularly - even 1 a week helps; with dinner is a good habit</td></tr>
+        <tr><td class="f"><span class="act-ico">🍓</span> Strawberries</td><td class="no">Daily - 1–2 cups, builds insulin sensitivity over time</td></tr>
+        <tr><td class="f"><span class="act-ico">🫐</span> Raspberries</td><td class="no">Most days - 1–2 cups, all-rounder with lots of fibre</td></tr>
+        <tr><td class="f"><span class="act-ico">🥭</span> Mango</td><td class="no">As a replacement - instead of sweet snacks, pastries or granola bars, with protein</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="fnote" style="margin:14px 14px 14px"><strong>Takeaway:</strong> don't judge a fruit only by its grams of sugar - how you use it changes what it does to your blood sugar. The apple pre-load is a specific tactic that differs from the book's general &quot;fruit last&quot; rule (see Food Groups). Educational only, not medical advice - talk to your doctor before changing your regimen.</div>
+</section>
 
 </main>
 
